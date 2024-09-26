@@ -1,5 +1,4 @@
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
-#from aiogram.types.inline_keyboard_markup import InlineKeyboardButton
 
 def global_clining_keyboard_bulder():
     bulder = ReplyKeyboardBuilder()

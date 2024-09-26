@@ -1,9 +1,9 @@
 from aiogram import Router, F
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 
 from app.data import files_actions
-from app.keyboards.animals import animals_keyboard_builder
+from app.keyboards.animals import animals_keyboard_builder, animal_actions_keyboards
 
 animal_router = Router()
 
@@ -14,6 +14,14 @@ async def show_animals(message: Message, state: FSMContext):
     keyboard = animals_keyboard_builder(animals)
     return message.answer(
         text="Виберіть вагу тварину",
-        reply_parameters=keyboard
-
+        reply_markup=keyboard
     )
+
+@animal_router.callback_query(F.data.startswith("anim_"))
+async def animal_actions(callbeck: CallbackQuery, state, FSMContext):
+    prodact = callback.data.split("_")[-1]
+    keybord = animal_actions_keyboards(animal)
+    return callbeck.message.answer(
+        text=animal,
+        keyboard=keybord
+        )
