@@ -1,5 +1,5 @@
 from aiogram import Router, F
-from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
+from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 
 from app.data import files_actions
@@ -30,17 +30,11 @@ async def animal_actions(callbeck: CallbackQuery, state:FSMContext):
 async def animals_cured(callback: CallbackQuery, state: FSMContext):
     animal = callback.data.split("_")[-1]   
     msg = files_actions.animals_cured(animal)
-    await callback.messege.answer(
-        text=msg,
-        reply_markup=ReplyKeyboardRemove()       
-    )
+    await callback.messege.answer(text=msg)
 
 
 @animal_router.callback_query(F.data.startswith("del_anim_"))
 async def del_animal(callback: CallbackQuery, state: FSMContext):
     animal = callback.data.split("_")[-1]
     msg = files_actions.del_animal(animal)
-    await callback.message.answer(
-        text=msg,
-        reply_markup=ReplyKeyboardRemove()
-        )
+    await callback.message.answer(text=msg)

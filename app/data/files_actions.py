@@ -6,7 +6,7 @@ from app.data import list_files
 
 def open_file(path: str = list_files.ANIMALS) -> list:
 
-    if not os.path.xeiste(path):
+    if not os.path.exists(path):
         with open(path, "w") as fh:
             json.dump([], fh)
 
@@ -23,7 +23,7 @@ def save_file(file: list, path: str = list_files.ANIMALS):
 def del_animal(animal):
     animals = open_file()
     animals.remove(animal)
-    save_file() 
+    save_file(animals) 
 
     return f"Тварину '{animal}' успішно видалено"
 
@@ -32,7 +32,7 @@ def animals_cured(animal, path: str = list_files.ANIMALS_CURED) -> str:
 
     animals_cured = open_file(path)
     animals_cured.append(animal)
-    save_file(path)
+    save_file(animals_cured, path)
 
     return f"Тварину '{animal}' успішно додано до списку вилікуваних"
 
