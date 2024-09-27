@@ -38,3 +38,29 @@ async def del_animal(callback: CallbackQuery, state: FSMContext):
     animal = callback.data.split("_")[-1]
     msg = files_actions.del_animal(animal)
     await callback.message.answer(text=msg)
+
+#
+@animal_router.message(F.text == "Додати новy Тварина")
+async def add_animal(message: Message, state: FSMContext):
+    await state.clear()
+    await state.set_state(animalForm.name)
+    await message.answer(text="Введіть назву Тварини")
+
+
+@animal_router.message(animalForm.name)
+async def save_new_animal(message: Message, state: FSMContext):
+    data = await state.update_data(name=message.text)
+    await state.clear()
+    msg = files_actions.add_animal(data.get("name"))
+    await message.answer(text=msg)
+
+
+@animal_router.message(F.text == "Список вилікуваних тварин")
+async def show_cured_animm(message: Message, state: FSMContext):
+    animals_cured = files_actions.open_file(list_files.ANIMALS_CURED)
+
+    msg = ""
+    for i, animm in enumerate(animals_cured, start=1):
+        msg += f"{i}. {animm}\n"
+
+    await message.answer(text=msg)

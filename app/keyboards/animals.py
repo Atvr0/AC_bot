@@ -13,7 +13,7 @@ def animals_keyboard_builder(animals: list):
 
 def animal_actions_keyboards (animal: str):
     builder = InlineKeyboardBuilder()  
-    builder.button(text="Перенести в список вилікуваних", callback_data=f"cured_animals_{animal}")
-    builder.button(text="Видалити", callback_data=f"del_animals_{animal}")
+    builder.button(text="Перенести в список вилікуваних", callback_data=f"cured_anim_{animal}")
+    builder.button(text="Видалити", callback_data=f"del_anim_{animal}")
     return builder.as_markup()
             

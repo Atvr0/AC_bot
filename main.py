@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 from app.routers.start import start_router
 from app.routers.animals import animal_router
-
+from app.routers.reviews import review_router
 
 load_dotenv()
 root_router = Router()
