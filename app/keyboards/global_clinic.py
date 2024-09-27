@@ -3,7 +3,7 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 def global_clining_keyboard_bulder():
     builder = ReplyKeyboardBuilder()
     builder.button(text="Показати тварин")
-    builder.button(text="Додати нову тварину на лікування")
+    builder.button(text="Додати новy Тварина")
     builder.button(text="Показати всі відгуки")
     builder.button(text="Додати новий відгук")
     builder.adjust(1)

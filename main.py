@@ -11,8 +11,9 @@ from app.routers.animals import animal_router
 from app.routers.reviews import review_router
 
 load_dotenv()
+
 root_router = Router()
-root_router.include_routers(start_router, animal_router)
+root_router.include_routers(start_router, animal_router, review_router)
 
 
 
