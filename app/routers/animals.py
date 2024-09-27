@@ -26,7 +26,7 @@ async def animal_actions(callbeck: CallbackQuery, state:FSMContext):
         reply_markup=keyboard
         )
 
-@animal_router.callback_query(F.data.startswith("sold_anim_"))    
+@animal_router.callback_query(F.data.startswith("cured_anim_"))    
 async def animals_cured(callback: CallbackQuery, state: FSMContext):
     animal = callback.data.split("_")[-1]   
     msg = files_actions.animals_cured(animal)
