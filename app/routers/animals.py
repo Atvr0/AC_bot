@@ -18,8 +18,8 @@ async def show_animals(message: Message, state: FSMContext):
     )
 
 @animal_router.callback_query(F.data.startswith("anim_"))
-async def animal_actions(callbeck: CallbackQuery, state, FSMContext):
-    prodact = callback.data.split("_")[-1]
+async def animal_actions(callbeck: CallbackQuery, state:FSMContext):
+    animal = callbeck.data.split("_")[-1]
     keybord = animal_actions_keyboards(animal)
     return callbeck.message.answer(
         text=animal,
