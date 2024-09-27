@@ -10,7 +10,7 @@ start_router = Router()
 @start_router.message(CommandStart())
 async def start_hendler(message: Message, state: FSMContext):
     keybord = global_clining_keyboard_bulder()
-    return message.answer(
+    await message.answer(
         text=f"Вітаю у ветеринарній клініці '{message.from_user.full_name}'",
         reply_markup=keybord
         )

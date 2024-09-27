@@ -12,7 +12,7 @@ animal_router = Router()
 async def show_animals(message: Message, state: FSMContext):
     animals = files_actions.open_file()
     keyboard = animals_keyboard_builder(animals)
-    return message.answer(
+    await message.answer(
         text="Виберіть вагу тварину",
         reply_markup=keyboard
     )
@@ -20,8 +20,27 @@ async def show_animals(message: Message, state: FSMContext):
 @animal_router.callback_query(F.data.startswith("anim_"))
 async def animal_actions(callbeck: CallbackQuery, state:FSMContext):
     animal = callbeck.data.split("_")[-1]
-    keybord = animal_actions_keyboards(animal)
-    return callbeck.message.answer(
+    keyboard = animal_actions_keyboards(animal)
+    await callbeck.message.answer(
         text=animal,
         reply_markup=keyboard
+        )
+
+@animal_router.callback_query(F.data.startswith("sold_anim_"))    
+async def animals_cured(callback: CallbackQuery, state: FSMContext):
+    animal = callback.data.split("_")[-1]   
+    msg = files_actions.animals_cured(animal)
+    await callback.messege.answer(
+        text=msg,
+        reply_markup=ReplyKeyboardRemove()       
+    )
+
+
+@animal_router.callback_query(F.data.startswith("del_anim_"))
+async def del_animal(callback: CallbackQuery, state: FSMContext):
+    animal = callback.data.split("_")[-1]
+    msg = files_actions.del_animal(animal)
+    await callback.message.answer(
+        text=msg,
+        reply_markup=ReplyKeyboardRemove()
         )
