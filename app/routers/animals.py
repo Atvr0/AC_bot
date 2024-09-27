@@ -23,5 +23,5 @@ async def animal_actions(callbeck: CallbackQuery, state:FSMContext):
     keybord = animal_actions_keyboards(animal)
     return callbeck.message.answer(
         text=animal,
-        keyboard=keybord
+        reply_markup=keyboard
         )
